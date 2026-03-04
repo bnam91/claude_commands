@@ -61,6 +61,20 @@ schtasks /query /tn "작업명" /fo LIST /v
 
 ---
 
+## 등록된 사용자 스크립트 (os_manager)
+
+| 스크립트 | 경로 | 설명 |
+|----------|------|------|
+| trash_today_downloads.py | `~/Documents/claude_skills/os_manager/trash_today_downloads.py` | 오늘 다운로드된 파일을 휴지통으로 이동 |
+
+예약 등록 시 예시:
+```bash
+# 매일 자정에 실행
+0 0 * * * /usr/bin/python3 ~/Documents/claude_skills/os_manager/trash_today_downloads.py
+```
+
+---
+
 ## 사용자 요청 처리
 
 - "예약 확인해줘" / "크론 목록" → OS 감지 후 해당 명령어 실행
