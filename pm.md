@@ -84,9 +84,10 @@ await appendParagraph(PAGE_ID, '출력할 내용');
 
 1. `node _db_get_today.js` → `END_TOGGLE_ID` 획득
 2. `node _eod_read.js` → 담당자 콜아웃 + 업무코멘트 수집
-3. 완료/미완료 분석 + 코멘트 종합
-4. `END_TOGGLE_ID` 기존 내용 삭제 후 마감브리핑 작성
-5. PM 총평: 리스크·미완료 항목 기준 내일 우선순위 제시
+3. `python3 ~/Documents/github_skills/app_reminder_control/app_reminders_control.py "GG_timeline"` → 타임라인 전체 조회 후, 콜아웃 ✅ 완료 항목과 대조하여 GG_timeline에서 해당 항목 완료 처리 (EventKit으로 isCompleted 처리)
+4. 완료/미완료 분석 + 코멘트 + 타임라인 종합
+5. `END_TOGGLE_ID` 기존 내용 삭제 후 마감브리핑 작성
+6. PM 총평: 리스크·미완료 항목 기준 내일 우선순위 제시
 
 **마감브리핑 판단 기준 (PM 총평 작성 시 반드시 준수)**
 
@@ -96,6 +97,9 @@ await appendParagraph(PAGE_ID, '출력할 내용');
 | 업무코멘트 ✅ ↔ 콜아웃 ⬜ 불일치 | 완료로 단정 ❌ → "업무코멘트 완료 표시, 콜아웃 체크 누락 — 확인 필요"로 표시 |
 | 담당자가 업무 내용 파악 못 했다고 표시 | PM 총평에 "내일 PM 직접 설명 필요" 항목으로 명시 |
 | 조건부 업무 (날짜 지정·도착 후 등) | 내일 우선순위 목록에서 제외, 별도 "대기" 항목으로 분리 |
+| 미완료 항목이 GG_timeline 🔴 높음 | 총평 내일 우선순위 최상단에 배치, "반드시 완료" 명시 |
+| 미완료 항목이 GG_timeline에 없음 | 지엽적 업무로 판단, 우선순위 하단 배치 |
+| 이번 주차 타임라인 항목 다수 미완료 | D-day 기준 진행 속도 코멘트 추가 ("런칭까지 X일, 현재 주차 완료율 부족" 등) |
 
 ### 브리핑 공통 원칙
 
