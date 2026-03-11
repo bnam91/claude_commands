@@ -3,9 +3,15 @@ Notion 페이지/데이터베이스를 읽고, 쓰고, 수정하는 스킬이야
 
 ## 초기 설정
 
-1. `config.example.json`을 `config.json`으로 복사
-2. Notion API 키 입력 (https://www.notion.so/my-integrations 에서 발급)
+1. `config.example.json` → `config.json` 으로 복사
+2. 아래 3가지 항목 입력:
+   - `api_key`: Notion API 키 (https://www.notion.so/my-integrations 에서 발급)
+   - `my_task_toggle_url`: 내 업무요청 토글 페이지 URL
+   - `colleagues`: 동료들의 업무요청 토글 URL (이름 + URL)
 3. 사용할 페이지/DB에 Integration 연결 필요
+
+> URL은 Notion 페이지 열고 → 우측 상단 "공유" → "링크 복사"로 가져오면 돼.
+> 설정 안 된 상태로 실행하면 자동으로 설정 안내가 출력돼.
 
 ## 사용 가능한 기능
 
