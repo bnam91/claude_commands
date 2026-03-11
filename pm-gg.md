@@ -8,7 +8,7 @@
 |------|-----|
 | 프로젝트명 | GG |
 | 목표 | 3.20(금) 런칭 |
-| D-day 기준일 | 2025-03-20 |
+| D-day 기준일 | 2026-03-20 |
 | 프로젝트 DB ID | `2f6111a5778881ceaf1be4e73f6644ea` |
 | 브리핑 DB ID | `318111a57788804ba081cb8ae05707ae` |
 | 스킬 경로 | `~/Documents/claude_skills/notion` |
@@ -22,6 +22,7 @@
 | 현빈 | 현빈02 | `2f1111a577888127951bc2b17188efff` | GG는 현빈02만 사용. 현빈01은 고야앤드미디어 전용. |
 | 지혜 | 지혜 | `2f1111a5778881e0b79eec85bbc540c5` | 일일 업무 콜아웃 |
 | 지혜 | 지혜 업무코멘트 (참고용) | `317111a5778880669d83c48e88d71b22` | 퇴근 전 작성. 마감브리핑 참고용. |
+| — | 이번주 주요 계획 및 이슈 (참고용) | `31d111a5-7788-800a-8056-f84150560ba5` | 월요일에 현빈이 직접 작성. 업무요청 추가 시 참고. 자동 수정 금지. |
 
 ---
 
@@ -47,3 +48,9 @@
 | "GOAL 진행 중으로 바꿔" | `node db_goal_status.js` |
 | "업무 추가" / "태스크 추가" | `node db_add_task.js "업무명" [--parent "부모키워드"]` |
 | "이번 주 데드라인" / "주간 마감 설정" | `node db_set_friday_deadline.js` |
+| "pm-gg 주간 브리핑" / "이번주 목표 입력" | `/pm_gg_weekly` 스킬 실행 |
+| "pm-gg 오전 브리핑" / "브리핑 초안 작성" | `/pm_gg_morning` 스킬 실행 → 1단계: `node _pm_briefing.js` |
+| "실제 콜아웃 전송해줘" | `cd ~/Documents/claude_skills/notion && node _send_to_real_callout.js` |
+| "pm-gg 면담" / "pm-interview-gg" | pm.md 개인면담 섹션 참조 → DB 분석 후 4가지 정리 제시 |
+
+> 면담 기록: `~/.claude/projects/-Users-a1/memory/pm-interviews.md` → `## pm-gg` 섹션
