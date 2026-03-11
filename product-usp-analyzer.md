@@ -96,7 +96,7 @@ URL: {입력 URL}
 아래 명령으로 "USP 분석" 폴더에 저장:
 
 ```bash
-python3 ~/Documents/github_skills/app_notes_control/app_notes_control.py \
+python3 ~/Documents/claude_skills/app_notes_control/app_notes_control.py \
   --create \
   --title "{상품명} USP 분석 ({오늘날짜})" \
   --body "{정리한 내용}" \
