@@ -1,12 +1,12 @@
 맥 미리알림(Reminders) 앱의 **GG_timeline** 목록을 제어하는 스킬이야.
-스크립트 경로: ~/Documents/github_skills/app_reminder_control/app_reminders_control.py
+스크립트 경로: ~/Documents/claude_skills/app_reminder_control/app_reminders_control.py
 기본 목록: GG_timeline (번호: 4)
 
 ## 사용 가능한 기능
 
 ### 1. GG_timeline 전체 조회
 ```bash
-python3 ~/Documents/github_skills/app_reminder_control/app_reminders_control.py "GG_timeline"
+python3 ~/Documents/claude_skills/app_reminder_control/app_reminders_control.py "GG_timeline"
 ```
 
 ### 2. 특정 섹션 조회
@@ -15,14 +15,14 @@ python3 ~/Documents/github_skills/app_reminder_control/app_reminders_control.py 
 
 ### 3. 미리알림 추가 (섹션 지정)
 ```bash
-python3 ~/Documents/github_skills/app_reminder_control/app_reminders_control.py 4 "섹션이름, 항목제목"
+python3 ~/Documents/claude_skills/app_reminder_control/app_reminders_control.py 4 "섹션이름, 항목제목"
 ```
 
 ### 4. 우선순위 변경
 EventKit으로 직접 처리:
 ```python
 import sys, time
-sys.path.insert(0, '~/Documents/github_skills/app_reminder_control')
+sys.path.insert(0, '~/Documents/claude_skills/app_reminder_control')
 from app_reminders_control import _get_event_store, fetch_reminders_sync
 
 event_store = _get_event_store()

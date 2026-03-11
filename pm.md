@@ -137,7 +137,7 @@ pm.md의 공통 DB 구조는 GG 기준. CC는 필드명이 다름에 주의.
 
 1. `node _db_get_today.js` → `END_TOGGLE_ID` 획득
 2. `node _eod_read.js` → 담당자 콜아웃 + 업무코멘트 수집
-3. `python3 ~/Documents/github_skills/app_reminder_control/app_reminders_control.py "GG_timeline"` → 타임라인 전체 조회 후, 콜아웃 ✅ 완료 항목과 대조하여 GG_timeline에서 해당 항목 완료 처리 (EventKit으로 isCompleted 처리)
+3. `python3 ~/Documents/claude_skills/app_reminder_control/app_reminders_control.py "GG_timeline"` → 타임라인 전체 조회 후, 콜아웃 ✅ 완료 항목과 대조하여 GG_timeline에서 해당 항목 완료 처리 (EventKit으로 isCompleted 처리)
 4. 완료/미완료 분석 + 코멘트 + 타임라인 종합
 5. `END_TOGGLE_ID` 기존 내용 삭제 후 마감브리핑 작성
 6. PM 총평: 리스크·미완료 항목 기준 내일 우선순위 제시
