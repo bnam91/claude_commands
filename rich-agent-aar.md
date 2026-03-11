@@ -174,11 +174,14 @@ curl -s -X POST "https://api.notion.com/v1/pages" \
     "parent": { "database_id": "31c111a5778880eba30ad18811857baa" },
     "properties": {
       "이름": { "title": [{ "text": { "content": "AAR" } }] },
-      "날짜": { "date": { "start": "YYYY-MM-DD" } }
+      "날짜": { "date": { "start": "YYYY-MM-DD" } },
+      "점수": { "number": {total} }
     },
     "children": [ ... ]
   }'
 ```
+
+**{total}은 4단계 score JSON의 total 값**을 그대로 사용한다.
 
 ## 사용자 요청 처리
 
