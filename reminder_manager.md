@@ -38,7 +38,34 @@ python ~/Documents/claude_skills/app_reminder_control/app_reminders_control.py [
 예시:
 - `python ... 4 "1주차, 명함만들기"` → 4번 목록의 "1주차" 섹션에 "명함만들기" 추가
 
-### 5. 우선순위 변경
+### 5. 깃발 표시 항목 조회 ⚠️ 중요
+
+**EventKit의 `priority == 1`은 깃발이 아니라 우선순위(높음)임. 깃발은 반드시 AppleScript로 조회해야 함.**
+
+```bash
+osascript -e '
+tell application "Reminders"
+    set remindersText to ""
+    set foundCount to 0
+    repeat with aList in lists
+        repeat with aReminder in (reminders of aList)
+            try
+                if flagged of aReminder is true and completed of aReminder is false then
+                    set remindersText to remindersText & (name of aReminder) & "|" & (name of aList) & "\n"
+                    set foundCount to foundCount + 1
+                end if
+            end try
+        end repeat
+    end repeat
+    if foundCount is 0 then return "EMPTY"
+    return remindersText
+end tell
+'
+```
+
+특정 목록만 조회하려면 `repeat with aList in lists` 대신 `set aList to list "inbox"` 사용.
+
+### 6. 우선순위 변경
 스크립트에 기능 없으므로 EventKit으로 직접 처리:
 ```python
 import sys, time
