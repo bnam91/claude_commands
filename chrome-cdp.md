@@ -107,7 +107,6 @@ fi
   --no-default-browser-check \
   --hide-crash-restore-bubble \
   --disable-blink-features=AutomationControlled \
-  --exclude-switches=enable-automation \
   > /tmp/chrome_cdp.log 2>&1 &
 
 # 포트 열릴 때까지 대기 (최대 10초)
