@@ -30,7 +30,7 @@ cd ~/Documents/claude_skills/notion && node claude_runner.js --read --who 지혜
 cd ~/Documents/claude_skills/notion && node claude_runner.js --read --summary --who 지혜
 ```
 
-## Legacy 이동 (일주일 지난 토글 → 이전 페이지)
+## Legacy 이동 (5일 지난 토글 → 이전 페이지)
 
 ```bash
 # 전체 담당자
@@ -39,18 +39,41 @@ cd ~/Documents/claude_skills/notion && node claude_runner.js --legacy-move
 # 특정 담당자만
 cd ~/Documents/claude_skills/notion && node claude_runner.js --legacy-move --who 지혜
 ```
-- 오늘 날짜로부터 7일 이상 지난 날짜 토글(하위 to_do 포함)을 각 담당자의 '이전' 페이지로 이동
+- 오늘 날짜로부터 5일 이상 지난 날짜 토글(하위 to_do 포함)을 각 담당자의 '이전' 페이지로 이동
 - 앵커블록이 아닌 블록은 **삭제가 아닌 이전 페이지로 이동**
-- **앵커블록**: 정리 시 유지. `child_page`(이전, inbox), `divider`, `toggle`(inbox, 📌로 시작, 7일 이내 날짜), `heading`(7일 이내 날짜), `paragraph`(업무요청_ 포함, 맨 끝 빈 것)
+- **앵커블록**: 정리 시 유지. `child_page`(이전, inbox), `divider`, `toggle`(inbox, 📌로 시작, 5일 이내 날짜), `heading`(5일 이내 날짜), `paragraph`(업무요청_ 포함, 맨 끝 빈 것)
 - 맨 끝에 빈 paragraph 블록이 항상 있도록 유지
 
 ## 업무 추가
 
+**단건 추가 (claude_runner.js)**
 ```bash
 cd ~/Documents/claude_skills/notion && node claude_runner.js --add --who 지혜 --date 3.2 --task "업무내용"
 ```
+
+**다건/배치 추가 (task_writer.js)** ← 업무요청 시 기본 사용
+```bash
+cd ~/Documents/claude_skills/notion && node task_writer.js --json '[
+  {
+    "who": "지혜",
+    "date": "3.17",
+    "tasks": [
+      { "task": "단순 업무" },
+      { "task": "복잡 업무명", "background": "배경", "input": "인풋", "output": "아웃풋" }
+    ]
+  },
+  {
+    "who": "수지",
+    "tasks": [{ "task": "업무내용" }]
+  }
+]'
+```
+- `date` 생략 시 오늘 날짜 자동 사용
+- 여러 담당자 동시 요청 가능
+- `background`, `input`, `output`, `comment` 중 하나라도 있으면 **[토글] 내용:** 자동 생성
 - 해당 날짜 토글이 있으면 그 안에 체크박스 추가, 없으면 토글 새로 만들고 추가
 - **날짜 미지정 시 오늘 날짜 사용**: `--date` 생략 시 M.D 형식(예: 3.2, 2.27) 또는 M/D 형식(예: 2/27)으로 오늘 날짜를 넣어 실행. 오늘 날짜 토글이 없으면 자동 생성된다.
+- `--background`, `--input`, `--output`, `--comment` 중 하나라도 있으면 체크박스 안에 **[토글] 내용:** 이 자동 생성되고 그 안에 내용이 들어감
 
 ## 업무요청 작성 템플릿
 
