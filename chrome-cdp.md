@@ -106,6 +106,8 @@ fi
   --no-first-run \
   --no-default-browser-check \
   --hide-crash-restore-bubble \
+  --disable-blink-features=AutomationControlled \
+  --exclude-switches=enable-automation \
   > /tmp/chrome_cdp.log 2>&1 &
 
 # 포트 열릴 때까지 대기 (최대 10초)
@@ -149,6 +151,24 @@ mcp__chrome-devtools__evaluate_script(script="document.title")
 - 각 프로필은 해당 디렉토리에서 직접 로그인한 세션을 그대로 사용
 - 세션 만료 시 CDP Chrome 창에서 직접 재로그인 필요
 - 단, Google 계정은 CDP 모드에서 신규 OAuth 로그인 차단됨 → 기존 세션 유지 중에만 사용 가능
+
+## MCP vs WebSocket
+
+MCP `chrome-devtools`는 기본적으로 자체 Chrome을 띄움. 포트 9222(로그인된 프로필)에 연결하려면:
+- `~/.claude.json`의 chrome-devtools 설정에 `--browserUrl http://127.0.0.1:9222` 인수 필요
+- 설정 변경 후 **Claude Code 재시작** 필요
+
+재시작 없이 즉시 사용하려면 Python WebSocket으로 직접 제어:
+```python
+import websocket, json, urllib.request
+
+with urllib.request.urlopen('http://localhost:9222/json/version') as r:
+    ws_url = json.loads(r.read())['webSocketDebuggerUrl']
+
+ws = websocket.create_connection(ws_url)
+# Target.createTarget으로 새 탭 열기
+ws.send(json.dumps({"id":1,"method":"Target.createTarget","params":{"url":"https://example.com"}}))
+```
 
 ## 캡챠 처리
 
