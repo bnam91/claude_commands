@@ -2,6 +2,7 @@ Claude 스킬 관련 폴더들을 git add, commit, push 해줘.
 
 대상 폴더:
 - ~/.claude/commands
+- ~/.claude/skills
 - ~/Documents/claude_skills
 
 ## 처리 흐름
@@ -22,4 +23,4 @@ Claude 스킬 관련 폴더들을 git add, commit, push 해줘.
 - 복합: "스킬 업데이트: 추가 X개, 수정 Y개"
 - Co-Authored-By 라인 불필요
 
-완료 후 두 폴더의 결과를 요약해서 보여줘.
+완료 후 세 폴더의 결과를 요약해서 보여줘.
