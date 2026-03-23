@@ -1,5 +1,5 @@
 GoAgent_Macbook_bot 텔레그램 채널을 tmux 백그라운드 세션으로 실행하는 스킬이야.
-사용자가 "텔레그램 봇 켜줘", "goagent 텔레그램 시작", "telegram 채널 실행" 등을 말할 때 실행해.
+사용자가 "텔레그램 봇 켜줘", "goagent 텔레그램 시작", "telegram 채널 실행", "텔레그램 봇 재시작해줘", "텔레그램 답장 안 와" 등을 말할 때 실행해.
 
 ## 동작
 
@@ -27,7 +27,17 @@ sleep 1 && tmux has-session -t goagent-telegram 2>/dev/null && echo "OK" || echo
 - **OK** → "GoAgent 텔레그램 봇이 백그라운드에서 시작됐어요. @GoAgent_Macbook_bot 으로 메시지 보내보세요." 라고 알려줘.
 - **FAIL** → "세션 시작 실패. tmux가 설치되어 있는지 확인해주세요." 라고 알려줘.
 
-### 3. 중지 요청 시 (`stop` 인자가 있을 때)
+### 3. 세션은 살아있는데 답장이 안 올 때 (`restart` 인자 또는 "답장 안 와" 등)
+
+플러그인 연결이 끊겨 있을 수 있음 → 세션 재시작:
+
+```bash
+tmux kill-session -t goagent-telegram && tmux new-session -d -s goagent-telegram 'claude --channels plugin:telegram@claude-plugins-official --dangerously-skip-permissions'
+```
+
+재시작 후 "재시작 완료. 텔레그램에서 메시지 보내보세요." 라고 알려줘.
+
+### 4. 중지 요청 시 (`stop` 인자가 있을 때)
 
 사용자가 `/goagent-telegram stop` 처럼 `stop` 인자를 전달한 경우:
 
