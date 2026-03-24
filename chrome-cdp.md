@@ -184,3 +184,12 @@ ws.send(json.dumps({"id":1,"method":"Target.createTarget","params":{"url":"https
 - `desk00` 유저의 Chrome은 `pkill -u a1`으로 건드리지 않음
 - `/tmp/chrome-debug`는 Google 로그인 없는 클린 상태
 - Chrome 재시작 시 기존 탭 세션 초기화됨
+
+## ⚠️ 일렉트론 앱 포트 절대 금지
+
+**포트 9333, 9334는 일렉트론 앱(web-editor) 전용이다. 절대 건드리지 않는다.**
+
+- `pkill` 등 프로세스 종료 시 `remote-debugging-port=9222` 대상만 종료
+- `remote-debugging-port=9333` 또는 `9334` 프로세스는 어떤 경우에도 kill 금지
+- chrome-devtools MCP가 9333/9334 탭을 반환해도 일렉트론 앱 탭이므로 navigate/click 등 조작 금지
+- 일반 Chrome 브라우저는 반드시 **포트 9222** 만 사용
