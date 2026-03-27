@@ -1,4 +1,8 @@
 구글 시트 '고야내부용'에 입금요청을 등록하는 스킬이야.
+
+## 실제 이체 실행
+입금요청 등록 후 실제 하나은행 이체는 **Windows PC에서 macro_bank 스크립트**로 실행해야 해.
+사용자가 "이체 실행해줘", "실제로 입금해줘" 등을 요청하면 Windows에서 해당 작업을 진행하라고 안내해.
 스크립트 경로: ~/Documents/claude_skills/payment_request/payment_request.py
 
 ## 시트 정보

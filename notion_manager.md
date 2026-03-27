@@ -74,3 +74,15 @@ Notion URL에서 추출:
 하이픈 없이 붙여쓰거나 있어도 동작함.
 
 결과는 한국어로 정리해서 보여줘.
+
+## 기본 대상 페이지
+
+사용자가 **"노션에 추가해줘"** 라고 하면 별도 URL 언급 없어도 아래 페이지에 서브페이지를 생성해:
+
+- **CHARIZARD 페이지**: `https://www.notion.so/CHARIZARD-2ca111a5778880c99435efef0cbf7707`
+- page_id: `2ca111a5778880c99435efef0cbf7707`
+
+```bash
+# 서브페이지 생성 예시
+node ~/Documents/claude_skills/notion_manager/notion_manager.js create-page 2ca111a5778880c99435efef0cbf7707 page "페이지 제목"
+```
