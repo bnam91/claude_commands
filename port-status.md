@@ -39,7 +39,26 @@ done
 |------|------|-----|----------------|
 | **9334** | Electron 앱 렌더러 (sangpe-editor) | `chrome-devtools` | ⚠️ 자동화 한정, kill 절대 금지 |
 | **9333** | Electron 앱 서브 렌더러 | — | ⚠️ kill 절대 금지 |
+| **9335** | 다른 Electron 프로젝트 (go-finder 등) | — | ⚠️ kill 금지 |
 | **9222** | 일반 Chrome (coq3820 프로필) | `chrome-devtools-9222` | ✅ 자유롭게 제어 가능 |
+
+---
+
+## 멀티 프로젝트 포트 충돌 방지
+
+여러 Electron 프로젝트를 동시에 띄울 때 포트가 겹치면 두 번째 앱이 CDP에 접근 불가.
+
+**포트 할당 규칙:**
+- `9334` → web-editor (sangpe-editor) 전용 — 변경 금지
+- `9335` → 다른 Electron 프로젝트 (go-finder 등)
+
+**다른 프로젝트 세션에 전달할 내용:**
+> "이 프로젝트 Electron 앱은 `--remote-debugging-port=9335` 로 띄워줘. `package.json`의 dev 스크립트를 `electron . --remote-debugging-port=9335` 로 고정해줘. 9334는 web-editor 전용이야."
+
+**go-finder `package.json` 설정 예시:**
+```json
+"app:dev": "ELECTRON_DEV=1 electron . --remote-debugging-port=9335"
+```
 
 ---
 
