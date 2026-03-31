@@ -7,6 +7,22 @@ description: 현재 CDP/디버깅 포트 연결 상태를 확인하고 유의사
 
 ## 실행 순서
 
+### 0단계: chrome-devtools-mcp 좀비 프로세스 확인 (항상 먼저 실행)
+
+```bash
+COUNT=$(ps aux | grep "chrome-devtools-mcp" | grep -v grep | wc -l | tr -d ' ')
+echo "chrome-devtools-mcp 프로세스 수: ${COUNT}개"
+if [ "$COUNT" -ge 20 ]; then
+  echo "⚠️ 좀비 프로세스 누적 감지 — 정리를 권장합니다"
+else
+  echo "✅ 정상 범위"
+fi
+```
+
+20개 이상이면 사용자에게 알리고 정리 여부를 물어본다. 정리 방법은 아래 4단계 참조.
+
+---
+
 ### 1단계: 실행 중인 CDP 프로세스 확인
 
 ```bash
@@ -30,6 +46,34 @@ done
 ### 3단계: MCP 연결 상태 확인
 
 `mcp__chrome-devtools__list_pages()` 로 현재 MCP가 어느 포트에 붙어있는지 확인.
+
+### 4단계: chrome-devtools-mcp 좀비 프로세스 확인 및 정리
+
+Claude Code 세션을 열 때마다 `chrome-devtools-mcp` 프로세스가 생성되는데, 세션이 닫혀도 프로세스가 남아 누적됨. 시스템이 느려지는 주요 원인.
+
+```bash
+# 누적된 MCP 프로세스 수 확인
+ps aux | grep "chrome-devtools-mcp" | grep -v grep | wc -l
+```
+
+**20개 이상이면 좀비 정리 권장.** 단, 현재 세션 프로세스(가장 최근 PID 그룹)는 남겨야 함:
+
+```bash
+# 현재 세션 PID 확인 (가장 최근 시작된 npm exec 프로세스)
+ps aux | grep "npm exec chrome-devtools-mcp" | grep -v grep | sort -k2 -n | tail -2
+
+# 위에서 확인한 PID를 KEEP_ABOVE에 입력 후 실행
+KEEP_ABOVE=<현재세션_최소PID>
+ps aux | grep "chrome-devtools-mcp" | grep -v grep | awk -v k=$KEEP_ABOVE '$2 < k {print $2}' | xargs kill 2>/dev/null
+echo "정리 완료. 남은 프로세스: $(ps aux | grep chrome-devtools-mcp | grep -v grep | wc -l)개"
+```
+
+> ⚠️ 현재 세션 MCP를 kill하면 도구가 끊기고 CC 재시작이 필요함. 정리 후 재시작하는 것을 권장.
+
+**빠른 전체 정리 (CC 재시작 감수할 때):**
+```bash
+pkill -f "chrome-devtools-mcp" && echo "전체 정리 완료 — CC 재시작 필요"
+```
 
 ---
 
