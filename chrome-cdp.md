@@ -124,7 +124,7 @@ with open('$PREF_FILE', 'w') as f:
 fi
 
 # CDP 모드로 재시작 (USER_DATA_DIR 변수 사용)
-"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" \
+arch -arm64 "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" \
   --remote-debugging-port=9222 \
   --remote-allow-origins='*' \
   --user-data-dir="${USER_DATA_DIR:-/tmp/chrome-debug}" \
