@@ -33,10 +33,10 @@ ALIAS="coq3820"  # 인수에서 추출
 
 case "$ALIAS" in
   coq3820)
-    USER_DATA_DIR="~/Documents/github_cloud/user_data/google_coq3820"
+    USER_DATA_DIR="/Users/a1/github/user_data/google_coq3820"
     ;;
   bnam91)
-    USER_DATA_DIR="~/Documents/github_cloud/user_data/coupangWing_bnam91"
+    USER_DATA_DIR="/Users/a1/github/user_data/naver_bnam91"
     ;;
   *)
     USER_DATA_DIR="/tmp/chrome-debug"
